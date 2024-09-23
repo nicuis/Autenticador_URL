@@ -4,12 +4,9 @@
 #include <memory>
 #include <string>
 
-namespace validator {
-
-    class ArgumentValidator {
+class ArgumentValidator {
+    
     public:
         static void validateArgs(int argc, char* argv[], std::shared_ptr<std::string>& urlStr);
-    };
-
-}
+};
 #endif

@@ -4,15 +4,8 @@
 #include <string>
 #include <memory> // Smart pointers
 
-using namespace std;
-
-namespace filters {
-
-    class URLFilter {
+class URLFilter {
     public:
-        static bool validateURL(const std::shared_ptr<string>& url);
-    };
-
-}
-
+        static bool validateURL(const std::shared_ptr<std::string>& url);
+};
 #endif
