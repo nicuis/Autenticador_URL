@@ -1,5 +1,5 @@
-#ifndef URL_FILTER_H
-#define URL_FILTER_H
+#ifndef URL_FILTERS_H
+#define URL_FILTERS_H
 
 #include <string>
 #include <memory> // Smart pointers
@@ -10,7 +10,7 @@ namespace filters {
 
     class URLFilter {
     public:
-        bool validateURL(const std::shared_ptr<string>& url);
+        static bool validateURL(const std::shared_ptr<string>& url);
     };
 
 }
