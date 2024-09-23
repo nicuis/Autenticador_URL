@@ -11,5 +11,4 @@ class URL {
         URL(const string& urlString);
         string getURL() const;  // Retorna a URL
 };
-
 #endif

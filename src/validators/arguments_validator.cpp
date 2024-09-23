@@ -1,7 +1,7 @@
 #include "arguments_validator.h"
 #include "exception_validator.h"
 #include "../filters/url_filters.h"
-#include "../filters/URL.h"
+#include "../src/URL.h"
 #include <stdexcept>
 
 void ArgumentValidator::validateArgs(int argc, char* argv[], std::shared_ptr<std::string>& urlStr) {
