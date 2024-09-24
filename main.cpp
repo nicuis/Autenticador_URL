@@ -1,6 +1,5 @@
 #include "src/validators/arguments_validator.h"
-#include "src/filters/url_filters.h"
-#include "src/validators/exception_validator.h"
+#include "src/exceptions/exception_validator.h"
 #include "src/URL.h"
 
 #include <iostream>
