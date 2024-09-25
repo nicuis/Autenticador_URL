@@ -4,9 +4,13 @@
 #include "url_filter.hpp"
 
 class protocol_filter : public url_filter {
+    
+    private:
+        std::unique_ptr<url_filter> next_filter;
+    
     public:
-        protocol_filter();
-        virtual void do_filter(std::string_view&& url) override;
+        protocol_filter(std::unique_ptr<url_filter> next_filter);
+        void do_filter(std::string_view&& url) override;
     
     private:
         void checkForHttpThenRemove(std::string_view& url);
