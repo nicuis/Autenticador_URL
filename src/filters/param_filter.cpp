@@ -35,7 +35,7 @@ void param_filter::validate_params(std::string_view& params) {
 
 void param_filter::check_that_has_no_empty_params(std::string_view& params) {
     if (!params.empty() && params.back() == '&')
-        throw url_validation_exception("& não pode ser o último caractere.");
+        throw url_validation_exception("Parametro invalido.");
 }
 
 std::string_view param_filter::retrieve_next_param(std::string_view& params) {
@@ -44,14 +44,14 @@ std::string_view param_filter::retrieve_next_param(std::string_view& params) {
         ? params
         : params.substr(0, ampersand_pos);
     if (next_param.empty())
-            throw url_validation_exception("Parâmetro vazio encontrado antes do '&'.");
+            throw url_validation_exception("Parametro invalido.");
     return next_param;
 }
 
 std::size_t param_filter::find_equals_position(std::string_view& current_param) {
     std::size_t equal_pos = current_param.find('=');
     if (equal_pos == std::string_view::npos)
-        throw url_validation_exception("Parâmetro sem valor (esperado 'chave=valor').");
+        throw url_validation_exception("Parametro invalido.");
     return equal_pos;
 }
 
@@ -59,10 +59,10 @@ void param_filter::check_if_there_are_valid_key_and_value(std::string_view& curr
     std::size_t equal_pos = find_equals_position(current_param);
     std::string_view key = current_param.substr(0, equal_pos);
     if (key.empty())
-        throw url_validation_exception("Chave vazia em um parâmetro.");
+        throw url_validation_exception("Parametro invalido.");
     std::string_view value = current_param.substr(equal_pos + 1);
     if (value.empty())
-        throw url_validation_exception("Valor vazio em um parâmetro.");
+        throw url_validation_exception("Parametro invalido.");
 }
 
 void param_filter::remove_first_param(std::string_view& params) {

@@ -31,10 +31,10 @@ void path_filter::validate_path(std::string_view& path) {
 
 void path_filter::check_that_doesnt_have_double_bars(std::string_view& path) {
     if (path.find("//") != std::string_view::npos)
-        throw url_validation_exception("Caminho contém barras duplas.");
+        throw url_validation_exception("Caminho invalido.");
 }
 
 void path_filter::check_that_doesnt_have_invalid_chars(std::string_view& path) {
     if (path.find_first_of(" \"<>#%{}|\\^`") != std::string::npos)
-        throw url_validation_exception("Caminho contém caracteres inválidos.");
+        throw url_validation_exception("Caminho invalido.");
 }

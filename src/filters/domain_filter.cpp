@@ -25,10 +25,10 @@ void domain_filter::validate_domain_and_port(std::string_view& domain) {
     validate_port_if_present_then_exclude(domain);
     if (domain.empty() || !has_any_dot(domain) || starts_or_ends_with_dots(domain)
             || has_double_dots(domain) || has_invalid_tld(domain))
-        throw url_validation_exception("Domínio vazio.");
+        throw url_validation_exception("Dominio invalido.");
     for (char c : domain) {
         if (!is_valid_domain_char(c)) {
-            throw url_validation_exception("Domínio contém caracteres inválidos.");
+            throw url_validation_exception("Dominio invalido.");
         }
     }
 }
