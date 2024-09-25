@@ -1,27 +1,17 @@
 #include "src/validators/arguments_validator.h"
 #include "src/exceptions/exception_validator.h"
-#include "src/URL.h"
+#include "src/io/show_texts.hpp"
 #include <iostream>
 #include <memory>
 
 int main(int argc, char* argv[]){
 
     try {
-
         ArgumentValidator::validateArgs(argc, argv);
-        std::cout << "URL válida: " << std::endl;
+        showTexts::printText("URL válida!");
     
     } catch (const exception_validator& e) {
-    
-        std::cerr << "Erro de validação: " << e.what() << std::endl;
-        return EXIT_FAILURE;
-    
-    } catch (const std::exception& e) {
-    
-        std::cerr << "Erro inesperado: " << e.what() << std::endl;
-        return EXIT_FAILURE;
-    
+        showTexts::printError(e);
     }
-
-    return EXIT_SUCCESS;
+    return 0;
 }
