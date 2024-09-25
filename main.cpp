@@ -1,7 +1,6 @@
 #include "src/validators/arguments_validator.h"
 #include "src/exceptions/exception_validator.h"
 #include "src/URL.h"
-
 #include <iostream>
 #include <memory>
 
@@ -9,9 +8,7 @@ int main(int argc, char* argv[]){
 
     try {
 
-        ArgumentValidator validator;
-
-        validator.validateArgs(argc, argv);
+        ArgumentValidator::validateArgs(argc, argv);
         std::cout << "URL válida: " << std::endl;
     
     } catch (const exception_validator& e) {

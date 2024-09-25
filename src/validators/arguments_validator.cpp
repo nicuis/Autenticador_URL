@@ -3,12 +3,12 @@
 #include "../URL.h"
 #include <stdexcept>
 
-void ArgumentValidator::validateArgs(int argc, char* argv[]) const {
-    
-    std::string argument = argv[1];
+void ArgumentValidator::validateArgs(int argc, char* argv[]) {
 
     if (argc != 2) 
         throw exception_validator("Número insuficiente de argumentos.");
+
+    std::string argument = argv[1];
 
     if (argument.empty()) 
         throw exception_validator("O argumento fornecido está vazio.");

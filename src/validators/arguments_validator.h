@@ -7,6 +7,6 @@
 class ArgumentValidator {
     
     public:
-        void validateArgs(int argc, char* argv[]) const;
+        static void validateArgs(int argc, char* argv[]);
 };
 #endif
