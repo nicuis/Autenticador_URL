@@ -2,7 +2,7 @@
 #include <string>
 #include "catch.hpp"
 #include "../src/validators/url_validator.hpp"
-#include "../src/exceptions/exception_validator.h"  
+#include "../src/exceptions/url_validation_exception.hpp"  
 
 TEST_CASE("Valid URLs", "[url]") {
 
@@ -38,39 +38,39 @@ TEST_CASE("Valid URLs", "[url]") {
 TEST_CASE("Invalid URLs", "[url]") {
 
     // URLs com erros de protocolo
-    REQUIRE_THROWS_AS(url_validator::validate("htp://exemplo.com"), exception_validator);    // Protocolo incorreto
-    REQUIRE_THROWS_AS(url_validator::validate("httpss://exemplo.com"), exception_validator); // Protocolo incorreto
+    REQUIRE_THROWS_AS(url_validator::validate("htp://exemplo.com"), url_validation_exception);    // Protocolo incorreto
+    REQUIRE_THROWS_AS(url_validator::validate("httpss://exemplo.com"), url_validation_exception); // Protocolo incorreto
     
     // URLs com domínios inválidos
-    REQUIRE_THROWS_AS(url_validator::validate("http://.com"), exception_validator);               // Domínio vazio
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo"), exception_validator);            // Falta o domínio de nível superior
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo..com"), exception_validator);       // Domínio com dois pontos
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com..com"), exception_validator);   // Domínio com dois pontos
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.c"), exception_validator);          // TLD muito curto
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com:"), exception_validator);       // Porta sem número
-    REQUIRE_THROWS_AS(url_validator::validate("http:///exemplo.com"), exception_validator);       // Barras extras no protocolo
-    REQUIRE_THROWS_AS(url_validator::validate("http:// exemplo.com"), exception_validator);       // Espaços na URL
-    REQUIRE_THROWS_AS(url_validator::validate("ftp://exemplo.com"), exception_validator);         // Protocolo inválido
+    REQUIRE_THROWS_AS(url_validator::validate("http://.com"), url_validation_exception);               // Domínio vazio
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo"), url_validation_exception);            // Falta o domínio de nível superior
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo..com"), url_validation_exception);       // Domínio com dois pontos
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com..com"), url_validation_exception);   // Domínio com dois pontos
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.c"), url_validation_exception);          // TLD muito curto
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com:"), url_validation_exception);       // Porta sem número
+    REQUIRE_THROWS_AS(url_validator::validate("http:///exemplo.com"), url_validation_exception);       // Barras extras no protocolo
+    REQUIRE_THROWS_AS(url_validator::validate("http:// exemplo.com"), url_validation_exception);       // Espaços na URL
+    REQUIRE_THROWS_AS(url_validator::validate("ftp://exemplo.com"), url_validation_exception);         // Protocolo inválido
     
     // URLs com portas inválidas
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com:abc"), exception_validator);    // Porta com letras
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com:999999"), exception_validator); // Porta fora do intervalo permitido
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com:abc"), url_validation_exception);    // Porta com letras
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com:999999"), url_validation_exception); // Porta fora do intervalo permitido
     
     // URLs malformadas
-    REQUIRE_THROWS_AS(url_validator::validate("http://"), exception_validator);
-    REQUIRE_THROWS_AS(url_validator::validate("https://"), exception_validator);
-    REQUIRE_THROWS_AS(url_validator::validate("://exemplo.com"), exception_validator);            // Protocolo ausente
-    REQUIRE_THROWS_AS(url_validator::validate("http:exemplo.com"), exception_validator);          // Protocolo sem "//"
+    REQUIRE_THROWS_AS(url_validator::validate("http://"), url_validation_exception);
+    REQUIRE_THROWS_AS(url_validator::validate("https://"), url_validation_exception);
+    REQUIRE_THROWS_AS(url_validator::validate("://exemplo.com"), url_validation_exception);            // Protocolo ausente
+    REQUIRE_THROWS_AS(url_validator::validate("http:exemplo.com"), url_validation_exception);          // Protocolo sem "//"
     
     // URLs com paths malformados
-    REQUIRE_THROWS_AS(url_validator::validate("http:///exemplo.com//caminho"), exception_validator);       // Barras duplas no path
-    REQUIRE_THROWS_AS(url_validator::validate("http:///exemplo.com/ caminho"), exception_validator);       // Espaço no path
+    REQUIRE_THROWS_AS(url_validator::validate("http:///exemplo.com//caminho"), url_validation_exception);       // Barras duplas no path
+    REQUIRE_THROWS_AS(url_validator::validate("http:///exemplo.com/ caminho"), url_validation_exception);       // Espaço no path
 
     // URL com param malformado
-    REQUIRE_THROWS_AS(url_validator::validate("https://exemplo.com/caminho/?query=valor&"), exception_validator);       // Param vazio
-    REQUIRE_THROWS_AS(url_validator::validate("https://exemplo.com/caminho/?query=valor&&query=valor"), exception_validator);       // Param vazio
+    REQUIRE_THROWS_AS(url_validator::validate("https://exemplo.com/caminho/?query=valor&"), url_validation_exception);       // Param vazio
+    REQUIRE_THROWS_AS(url_validator::validate("https://exemplo.com/caminho/?query=valor&&query=valor"), url_validation_exception);       // Param vazio
 
     // URLs com fragmentos incorretos
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com#"), exception_validator);       // Fragmento vazio
-    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com# "), exception_validator);      // Fragmento com espaço
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com#"), url_validation_exception);       // Fragmento vazio
+    REQUIRE_THROWS_AS(url_validator::validate("http://exemplo.com# "), url_validation_exception);      // Fragmento com espaço
 }

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "../exceptions/exception_validator.h"
+#include "../exceptions/url_validation_exception.hpp"
 
 class showTexts {
 
@@ -12,7 +12,7 @@ class showTexts {
         ~showTexts() = delete;
 
     public:
-        static void printError(const exception_validator& e);
+        static void printError(const url_validation_exception& e);
         static void printText(const std::string& text);
 };
 #endif

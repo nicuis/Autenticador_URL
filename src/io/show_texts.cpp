@@ -1,6 +1,6 @@
 #include "show_texts.hpp"
 
-void showTexts::printError(const exception_validator& e) {
+void showTexts::printError(const url_validation_exception& e) {
     std::cerr << "Erro de validação: " << e.what() << std::endl;
 }
 

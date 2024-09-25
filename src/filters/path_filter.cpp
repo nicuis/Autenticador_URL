@@ -1,8 +1,5 @@
 #include "path_filter.hpp"
-#include "../exceptions/exception_validator.h"
-#include <stdexcept>
-#include <iostream>
-#include <regex>
+#include "../exceptions/url_validation_exception.hpp"
 
 path_filter::path_filter(std::unique_ptr<url_filter> next_filter) :
     next_filter(std::move(next_filter))
@@ -34,10 +31,10 @@ void path_filter::validate_path(std::string_view& path) {
 
 void path_filter::check_that_doesnt_have_double_bars(std::string_view& path) {
     if (path.find("//") != std::string_view::npos)
-        throw exception_validator("Caminho contém barras duplas.");
+        throw url_validation_exception("Caminho contém barras duplas.");
 }
 
 void path_filter::check_that_doesnt_have_invalid_chars(std::string_view& path) {
     if (path.find_first_of(" \"<>#%{}|\\^`") != std::string::npos)
-        throw exception_validator("Caminho contém caracteres inválidos.");
+        throw url_validation_exception("Caminho contém caracteres inválidos.");
 }

@@ -1,6 +1,5 @@
 #include "domain_filter.hpp"
-#include "../exceptions/exception_validator.h"
-#include <stdexcept>
+#include "../exceptions/url_validation_exception.hpp"
 
 domain_filter::domain_filter(std::unique_ptr<url_filter> next_filter) :
     next_filter(std::move(next_filter))
@@ -26,10 +25,10 @@ void domain_filter::validate_domain_and_port(std::string_view& domain) {
     validate_port_if_present_then_exclude(domain);
     if (domain.empty() || !has_any_dot(domain) || starts_or_ends_with_dots(domain)
             || has_double_dots(domain) || has_invalid_tld(domain))
-        throw exception_validator("Domínio vazio.");
+        throw url_validation_exception("Domínio vazio.");
     for (char c : domain) {
         if (!is_valid_domain_char(c)) {
-            throw exception_validator("Domínio contém caracteres inválidos.");
+            throw url_validation_exception("Domínio contém caracteres inválidos.");
         }
     }
 }
@@ -39,7 +38,7 @@ void domain_filter::validate_port_if_present_then_exclude(std::string_view& doma
     if (port_pos != std::string_view::npos) {
         std::string_view port_str = domain_with_port.substr(port_pos + 1);
         if (port_str.empty() || !is_valid_port(port_str))
-            throw exception_validator("Porta inválida.");
+            throw url_validation_exception("Porta inválida.");
         domain_with_port.remove_suffix(domain_with_port.size() - port_pos);
     }
 }

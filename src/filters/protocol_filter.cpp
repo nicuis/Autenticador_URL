@@ -1,5 +1,5 @@
 #include "protocol_filter.hpp"
-#include "../exceptions/exception_validator.h"
+#include "../exceptions/url_validation_exception.hpp"
 
 protocol_filter::protocol_filter(std::unique_ptr<url_filter> next_filter) :
     next_filter(std::move(next_filter))
@@ -14,7 +14,7 @@ void protocol_filter::do_filter(std::string_view&& url) {
 
 void protocol_filter::checkForHttpThenRemove(std::string_view& url) {
     if (url.size() < 4 || url.substr(0, 4).compare("http") != 0)
-        throw exception_validator("Url invalida.");
+        throw url_validation_exception("Url invalida.");
     url.remove_prefix(4);
 }
 
@@ -25,6 +25,6 @@ void protocol_filter::checkForSAndRemoveIfPresent(std::string_view& url) {
 
 void protocol_filter::checkForProtocolSeparatorThenRemove(std::string_view& url) {
     if (url.size() < 3 || url.substr(0, 3).compare("://") != 0)
-        throw exception_validator("Url invalida.");
+        throw url_validation_exception("Url invalida.");
     url.remove_prefix(3);
 }
