@@ -7,12 +7,12 @@
 
 int main(int argc, char* argv[]){
 
-    std::shared_ptr<std::string> urlStr;
-
     try {
 
-        ArgumentValidator::validateArgs(argc, argv, urlStr);
-        std::cout << "URL válida: " << *urlStr << std::endl;
+        ArgumentValidator validator;
+
+        validator.validateArgs(argc, argv);
+        std::cout << "URL válida: " << std::endl;
     
     } catch (const exception_validator& e) {
     

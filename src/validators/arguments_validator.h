@@ -7,6 +7,6 @@
 class ArgumentValidator {
     
     public:
-        static void validateArgs(int argc, char* argv[], std::shared_ptr<std::string>& urlStr);
+        void validateArgs(int argc, char* argv[]) const;
 };
 #endif
