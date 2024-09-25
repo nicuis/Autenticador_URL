@@ -9,5 +9,4 @@ class url_validator {
     public:
         static void validate(std::string&& url);
 };
-
 #endif

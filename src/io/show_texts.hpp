@@ -7,6 +7,10 @@
 
 class showTexts {
 
+    private:
+        showTexts() = delete;
+        ~showTexts() = delete;
+
     public:
         static void printError(const exception_validator& e);
         static void printText(const std::string& text);
